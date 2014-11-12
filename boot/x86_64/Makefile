@@ -4,14 +4,15 @@ OUTPUT := kernel.sys
  
 OBJS := boot.o main.o
  
-all:	$(ISO)
+all:	$(ISO) func.rs
  
 $(ISO):	$(OUTPUT)
 	cp $(OUTPUT) iso/boot
 	grub-mkrescue -o $@ iso
  
 $(OUTPUT): $(OBJS) linker.ld
-	ld -nodefaultlibs -Tlinker.ld -o $@ $(OBJS)
+	rustc func.rs 
+	ld -nodefaultlibs -Tlinker.ld -o $@ $(OBJS) librustcode.a
  
 .s.o:
 	nasm -felf64 $< -o $@
