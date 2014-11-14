@@ -5,10 +5,10 @@ AT=@
 
 
 C_SOURCES=$(wildcard *.c)
-ASM_SOURCES=$(wildcard *.S)
+ASM_SOURCES=$(wildcard *.s)
 SOURCES=$(C_SOURCES) $(ASM_SOURCES)
 C_OBJECTS=$(patsubst %.c,%.o,$(C_SOURCES))
-ASM_OBJECTS=$(patsubst %.S,%.o,$(ASM_SOURCES))
+ASM_OBJECTS=$(patsubst %.s,%.o,$(ASM_SOURCES))
 OBJECTS=$(C_OBJECTS) $(ASM_OBJECTS)
 
 CFLAGS= -O0 -static -Wall -nostartfiles -nostdlib       \
@@ -19,9 +19,9 @@ CFLAGS= -O0 -static -Wall -nostartfiles -nostdlib       \
 %o:%c
 	@echo "$<"
 	$(AT)$(CC) -c $(CFLAGS) $< -o $@
-%o:%S
+%o:%s
 	@echo "$<"
-	$(AT)$(CC) -c $(CFLAGS) $< -o $@
+	$(AT)nasm -felf64 $< -o $@
 
 dummy: all
 	

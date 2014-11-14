@@ -1,4 +1,4 @@
-#![crate_name = "rustcode"]
+#![crate_name = "kernel"]
 #![crate_type = "staticlib"]
 #![feature(lang_items)]
 #![no_std]

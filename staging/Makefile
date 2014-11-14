@@ -1,8 +1,10 @@
+# http://wiki.osdev.org/64-bit_Higher_Half_Kernel_with_GRUB_2
+ISO := os.iso
+ 
 all:
-	cp $$SOURCE_ROOT/kernel/kernel iso
-	cp menu.lst iso/boot/grub
-	mkisofs -o $$SOURCE_ROOT/boot.iso -b boot/grub/stage2_eltorito  -no-emul-boot -c boot.cat  -boot-load-size 32 -boot-info-table  -l -L -J -R -r iso
+	ld -nodefaultlibs -Tlinker.ld -o kernel.sys ../kernel/main.o ../boot/x86_64/boot.o  ../kernel/libkernel.a
+	cp kernel.sys iso/boot
+	grub-mkrescue -o $(ISO) iso
 
 clean:
-	rm -f iso/kernel
-	rm -f $$SOURCE_ROOT/boot.iso
+	@rm -f $(ISO) iso/boot/kernel.sys kernel.sys
