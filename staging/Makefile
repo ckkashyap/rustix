@@ -2,7 +2,7 @@
 ISO := os.iso
  
 all:
-	ld -nodefaultlibs -Tlinker.ld -o kernel.sys ../boot/x86_64/boot.o  ../kernel/libkernel.a 
+	ld -nodefaultlibs -Tlinker.ld -o kernel.sys --start-group ../boot/x86_64/boot.o  ../kernel/libkernel.a --end-group 
 	cp kernel.sys iso/boot
 	grub-mkrescue -o $(ISO) iso
 
