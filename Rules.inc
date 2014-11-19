@@ -26,7 +26,7 @@ CC=gcc
 AT=@
 
 
-C_SOURCES=$(wildcard *.c)
+C_SOURCES=$(wildcard *.c) 
 ASM_SOURCES=$(wildcard *.s)
 SOURCES=$(C_SOURCES) $(ASM_SOURCES)
 C_OBJECTS=$(patsubst %.c,%.o,$(C_SOURCES))

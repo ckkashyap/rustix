@@ -22,8 +22,9 @@
 
 all: libkernel.a
 
-libkernel.a: func.rs
-	rustc func.rs
+libkernel.a: kernel.rs
+	rustc $^
+	
 
 clean:
 	rm -f libkernel.a
