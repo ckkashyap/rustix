@@ -1,0 +1,18 @@
+{
+	"data-layout": "e-i64:64-f80:128-n8:16:32:64-S128",
+	"llvm-target": "x86_64-generic-generic",
+	"target-endian": "little",
+	"target-word-size": "64",
+	"arch": "x86_64",
+	"os": "avery",
+	"linker": "no-linker",
+	"relocation_model": "static",
+	"code_model": "kernel",
+	"exe_suffix": "",
+	"features": "",
+	"executables": true,
+	"disable_redzone": true,
+	"linker_is_gnu": true,
+	"pre_link_args": [],
+	"post_link_args": []
+}

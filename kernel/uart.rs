@@ -26,7 +26,7 @@
 #[no_mangle]
 pub fn hello () {
 	unsafe {
-		*((0xb8002 ) as *mut u8) = 66;
+		*((0xb8002 ) as *mut u8) = 67;
 		*((0xb8003 ) as *mut u8) = 0x6;
 		asm!("mov $$0xff, %eax" : /* no outputs */ : /* no inputs */ : "eax");
 	}
