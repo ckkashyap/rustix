@@ -4,7 +4,7 @@
 	"target-endian": "little",
 	"target-word-size": "64",
 	"arch": "x86_64",
-	"os": "avery",
+	"os": "unix",
 	"linker": "no-linker",
 	"relocation_model": "static",
 	"code_model": "kernel",
