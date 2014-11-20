@@ -3,6 +3,8 @@
 [EXTERN _loadStart]
 [EXTERN _loadEnd]
 [EXTERN _bssEnd]
+
+global __morestack
  
 ALIGN 8
 MbHdr:
@@ -149,3 +151,14 @@ Gdtr2:
 Gdtr3:
 	DW	23
 	DQ	TmpGdt + 24 + 0xFFFFFFFF80000000
+
+
+
+
+
+__morestack:
+	mov eax, 0x1234
+        ;cli
+        ;hlt
+        jmp __morestack
+
