@@ -25,19 +25,23 @@ CC=gcc
 
 AT=@
 
-
+RUST_SOURCES=$(wildcard *.rs)
 C_SOURCES=$(wildcard *.c) 
 ASM_SOURCES=$(wildcard *.s)
 SOURCES=$(C_SOURCES) $(ASM_SOURCES)
 C_OBJECTS=$(patsubst %.c,%.o,$(C_SOURCES))
+RUST_OBJECTS=$(patsubst %.rs,%.o,$(RUST_SOURCES)
 ASM_OBJECTS=$(patsubst %.s,%.o,$(ASM_SOURCES))
-OBJECTS=$(C_OBJECTS) $(ASM_OBJECTS)
+OBJECTS=$(C_OBJECTS) $(ASM_OBJECTS) 
 
 CFLAGS= -O0 -static -Wall -nostartfiles -nostdlib       \
 	-nodefaultlibs -nostdinc -fno-builtin           \
 	-DKERNEL_VERSION="\"$(KERNEL_VERSION)\""        \
 	-D_KERNEL_ -I$(INCLUDE)
 
+%o:%rs
+	@echo "$<"
+	$(AT)rustc  $<  --target $(SOURCE_ROOT)/x86_64-avery-kernel.json  -Z no-landing-pads  --emit=obj
 %o:%c
 	@echo "$<"
 	$(AT)$(CC) -c $(CFLAGS) $< -o $@

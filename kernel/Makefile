@@ -20,12 +20,10 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+include $(SOURCE_ROOT)/Rules.inc
+
 all: kernel.o
 
-kernel.o: kernel.rs uart.rs
-	rustc kernel.rs  --target x86_64-avery-kernel.json  -Z no-landing-pads  --emit=obj
-	#rustc kernel.rs -L /usr/local/lib/rustlib/x86_64-unknown-linux-gnu/lib --target x86_64-avery-kernel.json  -Z no-landing-pads  --emit=obj
-	
 
 clean:
 	rm -f kernel.o
