@@ -4,7 +4,7 @@
 [EXTERN _loadEnd]
 [EXTERN _bssEnd]
 
-global __morestack
+global __morestack, memset
  
 ALIGN 8
 MbHdr:
@@ -162,3 +162,7 @@ __morestack:
         ;hlt
         jmp __morestack
 
+
+memset:
+	jmp memset
+	ret

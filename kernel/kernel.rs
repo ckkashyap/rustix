@@ -29,6 +29,7 @@
 #[lang="sized"]
 
 mod uart;
+mod x86asm;
 
 fn kashyap () {
 	//unsafe {

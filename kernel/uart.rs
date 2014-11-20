@@ -21,13 +21,34 @@
 // SOFTWARE.
 
 
-
+use super::x86asm;
 
 pub fn earlyinit () { 
-	unsafe {
-		*((0xb8002 ) as *mut u8) = 67;
-		*((0xb8003 ) as *mut u8) = 0x6;
-		asm!("mov $$0xff, %eax" : /* no outputs */ : /* no inputs */ : "eax");
-	}
+
+	super::x86asm::outb(0x3f8 + 2 , 0);
+	super::x86asm::outb(0x3f8+3, 0x80);    // Unlock divisor
+	super::x86asm::outb(0x3f8+0, 12);
+	super::x86asm::outb(0x3f8+1, 0);
+	super::x86asm::outb(0x3f8+3, 0x03);    // Lock divisor, 8 data bits.
+	super::x86asm::outb(0x3f8+4, 0);
+	//super::x86asm::outb(0x3f8+1, 0x01);    // Enable receive interrupts.
+
+
+//	let r = super::x86asm::inb(0x3f8+5);
+//
+//	if (r == 0xff) {
+//		unsafe {
+//			*((0xb8002 ) as *mut u8) = 66;
+//			*((0xb8003 ) as *mut u8) = 0x4f;
+//			asm!("mov $$0xff, %eax" : /* no outputs */ : /* no inputs */ : "eax");
+//		}
+//	} else {
+//		unsafe {
+//			*((0xb8002 ) as *mut u8) = 65;
+//			*((0xb8003 ) as *mut u8) = 0x1f;
+//			asm!("mov $$0xff, %eax" : /* no outputs */ : /* no inputs */ : "eax");
+//		}
+//	}
+//
 
 }

@@ -23,11 +23,17 @@
 
 
 
-fn outp () {
-	//unsafe {
-	//	*((0xb8000 ) as *mut u8) = 65;
-	//	*((0xb8001 ) as *mut u8) = 0x6;
-	//	asm!("mov $$0xff, %eax" : /* no outputs */ : /* no inputs */ : "eax");
-	//}
+pub fn outb (port: u16, value: u8) {
+	unsafe {
+	asm!("out %al, %dx"::"{al}"(value), "{dx}"(port));
+	}
+}
+
+pub fn inb(port: u16) -> u8 {
+        let ret : u8;
+	unsafe {
+        asm!("inb %dx, %al" : "={ax}"(ret) : "{dx}"(port));
+	}	
+        return ret;
 }
 
