@@ -22,30 +22,12 @@
 
 
 
-#![crate_name = "kernel"]
-#![crate_type = "staticlib"]
-#![feature(lang_items, asm)]
-#![no_std]
-#[lang="sized"]
 
-mod uart;
-mod asm;
-
-fn kashyap () {
+fn outp () {
 	//unsafe {
 	//	*((0xb8000 ) as *mut u8) = 65;
 	//	*((0xb8001 ) as *mut u8) = 0x6;
 	//	asm!("mov $$0xff, %eax" : /* no outputs */ : /* no inputs */ : "eax");
 	//}
-	uart::hello();
 }
 
-#[no_mangle]
-pub extern "C" fn main()  {
-	loop {
-		kashyap();
-	}
-        //return 255;
-}
-
-#[lang = "stack_exhausted"] extern fn stack_exhausted() {}
