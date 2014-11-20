@@ -29,7 +29,6 @@
 #[lang="sized"]
 
 mod uart;
-mod asm;
 
 fn kashyap () {
 	//unsafe {
@@ -37,7 +36,7 @@ fn kashyap () {
 	//	*((0xb8001 ) as *mut u8) = 0x6;
 	//	asm!("mov $$0xff, %eax" : /* no outputs */ : /* no inputs */ : "eax");
 	//}
-	uart::hello();
+	uart::earlyinit();
 }
 
 #[no_mangle]

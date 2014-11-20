@@ -23,8 +23,7 @@
 
 
 
-#[no_mangle]
-pub fn hello () {
+pub fn earlyinit () { 
 	unsafe {
 		*((0xb8002 ) as *mut u8) = 67;
 		*((0xb8003 ) as *mut u8) = 0x6;
