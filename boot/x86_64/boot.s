@@ -4,7 +4,6 @@
 [EXTERN _loadEnd]
 [EXTERN _bssEnd]
 
-global __morestack, memset
  
 ALIGN 8
 MbHdr:
@@ -89,6 +88,14 @@ EntryPoint:
 	jmp $
 
 
+global memset
+memset:
+        mov rax, rsi
+        mov rcx, rdx
+        rep stosb
+        ret
+
+
 [BITS 32]
 [EXTERN Pml4]
 [EXTERN Pdpt]
@@ -155,14 +162,3 @@ Gdtr3:
 
 
 
-
-__morestack:
-	mov eax, 0x1234
-        ;cli
-        ;hlt
-        jmp __morestack
-
-
-memset:
-	jmp memset
-	ret
