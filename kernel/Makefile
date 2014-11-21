@@ -22,7 +22,7 @@
 
 include $(SOURCE_ROOT)/Rules.inc
 
-all: kernel.o
+all: kernel.rs uart.rs x86asm.rs kernel.o
 
 
 clean:
