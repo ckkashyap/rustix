@@ -8,9 +8,13 @@ OBJECTS=$(SOURCE_ROOT)/boot/x86_64/boot.o \
 	$(SOURCE_ROOT)/kernel/kernel.o
  
 all:
-	ld -nodefaultlibs -Tlinker.ld -o kernel.sys --start-group $(OBJECTS) --end-group 
+	$(LD) -nodefaultlibs -Tlinker.ld -o kernel.sys --start-group $(OBJECTS) --end-group 
+
+
+iso:
 	cp kernel.sys iso/boot
 	grub-mkrescue -o $(ISO) iso
+	
 
 clean:
 	@rm -f $(ISO) iso/boot/kernel.sys kernel.sys

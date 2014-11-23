@@ -20,6 +20,12 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+LD=ld
+OS=$(shell uname)
+ifeq ($(OS), Darwin)
+LD=$(LINKEDITOR)
+endif
+
 INCLUDE=-I. -I $(SOURCE_ROOT)/include
 CC=gcc
 
