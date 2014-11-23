@@ -20,20 +20,22 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+use super::x86asm::outb;
+use super::x86asm::inb;
 
 const COM1 : u16 = 0x3f8;
 
 pub fn earlyinit () { 
-	super::x86asm::outb(COM1+2 , 0);
-	super::x86asm::outb(COM1+3, 0x80);    // Unlock divisor
-	super::x86asm::outb(COM1+0, 12);
-	super::x86asm::outb(COM1+1, 0);
-	super::x86asm::outb(COM1+3, 0x03);    // Lock divisor, 8 data bits.
-	super::x86asm::outb(COM1+4, 0);
-	super::x86asm::outb(COM1+1, 0x01);    // Enable receive interrupts.
+	outb(COM1+2 , 0);
+	outb(COM1+3, 0x80);    // Unlock divisor
+	outb(COM1+0, 12);
+	outb(COM1+1, 0);
+	outb(COM1+3, 0x03);    // Lock divisor, 8 data bits.
+	outb(COM1+4, 0);
+	outb(COM1+1, 0x01);    // Enable receive interrupts.
 
 
-	let r = super::x86asm::inb(COM1+5);
+	inb(COM1+5);
 
-	super::x86asm::outb(COM1, 66);
+	outb(COM1, 66);
 }
