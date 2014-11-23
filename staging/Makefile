@@ -8,7 +8,7 @@ OBJECTS=$(SOURCE_ROOT)/boot/x86_64/boot.o \
 	$(SOURCE_ROOT)/kernel/kernel.o
  
 all:
-	ld -nodefaultlibs -Tlinker.ld -o kernel.sys --start-group $(OBJECTS) --end-group 
+	/Users/kashyap/Documents/my-gcc/install/bin/x86_64-linux-gnu-ld -nodefaultlibs -Tlinker.ld -o kernel.sys --start-group $(OBJECTS) --end-group 
 	cp kernel.sys iso/boot
 	grub-mkrescue -o $(ISO) iso
 

@@ -35,5 +35,5 @@ pub fn earlyinit () {
 
 	let r = super::x86asm::inb(COM1+5);
 
-	super::x86asm::outb(COM1, 65);
+	super::x86asm::outb(COM1, 66);
 }

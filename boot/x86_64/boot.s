@@ -39,6 +39,30 @@ MbHdr:
 	DD	8
  
 	; Hdr End Mark
+mboot:
+        %define MULTIBOOT1_HEADER_MAGIC  0x1BADB002
+        %define MULTIBOOT1_HEADER_FLAGS  0x00010000
+        %define MULTIBOOT1_CHECKSUM      -(MULTIBOOT1_HEADER_MAGIC + MULTIBOOT1_HEADER_FLAGS)
+        
+        ; This is the GRUB Multiboot header. A boot signature
+        dd MULTIBOOT1_HEADER_MAGIC
+        dd MULTIBOOT1_HEADER_FLAGS
+        dd MULTIBOOT1_CHECKSUM
+        dd mboot
+        
+        dd _loadStart
+        dd _loadEnd
+        dd _bssEnd
+        dd EntryPoint
+        
+	; VBE related
+        dd 0    ; Mode
+        dd 0    ; Width 
+        dd 0    ; Height
+        dd 32   ; Depth
+
+
+
 HdrEnd:
 
 
