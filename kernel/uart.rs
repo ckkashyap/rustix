@@ -23,10 +23,11 @@
 use super::x86asm::outb;
 use super::x86asm::inb;
 
-const COM1 : u16 = 0x3f8;
-//static uartInitialized : bool = false;
 
-pub fn earlyinit () { 
+const COM1 : u16 = 0x3f8;
+static mut uartInitialized : bool = false;
+
+pub fn early_init () { 
 	outb(COM1+2 , 0);
 	outb(COM1+3, 0x80);    // Unlock divisor
 	outb(COM1+0, 12);
@@ -40,9 +41,10 @@ pub fn earlyinit () {
 		return;
 	}
 
-	//uartInitialized = true;
+	unsafe {
+		uartInitialized = true;
+	}
+}
 
-	
-
-	outb(COM1, 66);
+fn uart_putc(text: &str) {
 }

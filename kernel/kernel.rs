@@ -27,6 +27,7 @@
 #![feature(lang_items, asm)]
 #![no_std]
 #[lang="sized"]
+#[lang="sync"]
 
 mod uart;
 mod x86asm;
@@ -37,7 +38,7 @@ fn kashyap () {
 	//	*((0xb8001 ) as *mut u8) = 0x6;
 	//	asm!("mov $$0xff, %eax" : /* no outputs */ : /* no inputs */ : "eax");
 	//}
-	uart::earlyinit();
+	uart::early_init();
 }
 
 #[no_mangle]

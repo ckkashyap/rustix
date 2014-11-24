@@ -22,8 +22,11 @@
 
 include $(SOURCE_ROOT)/Rules.inc
 
-all: kernel.rs uart.rs x86asm.rs kernel.o
+all: $(RUST_SOURCES) libcore.rlib
+	rustc  kernel.rs --target $(SOURCE_ROOT)/x86_64-avery-kernel.json -Z no-landing-pads  --emit=obj  --extern core=libcore.rlib  
 
+libcore.rlib:
+	rustc --crate-type lib /Users/kashyap/Documents/rust-nightly/src/libcore/lib.rs --crate-name core
 
 clean:
 	rm -f kernel.o

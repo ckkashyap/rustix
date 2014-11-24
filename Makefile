@@ -29,7 +29,7 @@ iso: all
 	make SOURCE_ROOT=$$PWD -C staging iso
 
 run:
-	qemu-system-x86_64 -kernel staging/kernel.sys -serial stdio
+	qemu-system-x86_64 -kernel staging/kernel.sys -serial stdio -vnc :1
 
 clean:
 	make SOURCE_ROOT=$$PWD -C boot/x86_64 clean
