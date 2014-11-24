@@ -24,6 +24,7 @@ use super::x86asm::outb;
 use super::x86asm::inb;
 
 const COM1 : u16 = 0x3f8;
+//static uartInitialized : bool = false;
 
 pub fn earlyinit () { 
 	outb(COM1+2 , 0);
@@ -35,7 +36,13 @@ pub fn earlyinit () {
 	outb(COM1+1, 0x01);    // Enable receive interrupts.
 
 
-	inb(COM1+5);
+	if inb(COM1+5) == 0xff {
+		return;
+	}
+
+	//uartInitialized = true;
+
+	
 
 	outb(COM1, 66);
 }
