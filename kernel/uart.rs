@@ -44,6 +44,8 @@ pub fn early_init () {
 	unsafe {
 		uartInitialized = true;
 	}
+
+	outb(COM1, 65);
 }
 
 fn uart_putc(text: &str) {

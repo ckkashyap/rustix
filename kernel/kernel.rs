@@ -29,15 +29,18 @@
 #[lang="sized"]
 #[lang="sync"]
 
+extern crate core;
+
 mod uart;
 mod x86asm;
 
+
 fn kashyap () {
-	//unsafe {
-	//	*((0xb8000 ) as *mut u8) = 65;
-	//	*((0xb8001 ) as *mut u8) = 0x6;
-	//	asm!("mov $$0xff, %eax" : /* no outputs */ : /* no inputs */ : "eax");
-	//}
+	unsafe {
+		*((0xb8000 ) as *mut u8) = 65;
+		*((0xb8001 ) as *mut u8) = 0x6;
+		asm!("mov $$0xff, %eax" : /* no outputs */ : /* no inputs */ : "eax");
+	}
 	uart::early_init();
 }
 
@@ -49,4 +52,6 @@ pub extern "C" fn main()  {
         //return 255;
 }
 
-#[lang = "stack_exhausted"] extern fn stack_exhausted() {}
+#[lang = "stack_exhausted"] extern fn stack_exhausted() { loop {} }
+#[lang = "eh_personality"] extern fn eh_personality() {loop {} }
+#[lang = "panic_fmt"] fn panic_fmt() -> ! { loop {} }
