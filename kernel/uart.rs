@@ -22,6 +22,7 @@
 
 use super::x86asm::outb;
 use super::x86asm::inb;
+use core::prelude::Str;
 
 
 const COM1 : u16 = 0x3f8;
