@@ -22,14 +22,15 @@
 
 use super::x86asm::outb;
 use super::x86asm::inb;
-use core::prelude::Str;
+
+use core::str::StrPrelude;
+
 
 
 const COM1 : u16 = 0x3f8;
 static mut uartInitialized : bool = false;
 
 pub fn early_init () { 
-	uart_putc("hello");
 	outb(COM1+2 , 0);
 	outb(COM1+3, 0x80);    // Unlock divisor
 	outb(COM1+0, 12);
@@ -48,7 +49,11 @@ pub fn early_init () {
 	}
 
 	outb(COM1, 65);
+	uart_putc("123456");
 }
 
 fn uart_putc(text: &str) {
+	for b in text.bytes() {
+		outb(COM1, 67);
+	}
 }
