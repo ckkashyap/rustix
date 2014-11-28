@@ -29,6 +29,7 @@ const COM1 : u16 = 0x3f8;
 static mut uartInitialized : bool = false;
 
 pub fn early_init () { 
+	uart_putc("hello");
 	outb(COM1+2 , 0);
 	outb(COM1+3, 0x80);    // Unlock divisor
 	outb(COM1+0, 12);

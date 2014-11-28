@@ -5,6 +5,7 @@ include $(SOURCE_ROOT)/Rules.inc
 ISO := os.iso
 
 OBJECTS=$(SOURCE_ROOT)/boot/x86_64/boot.o \
+	$(SOURCE_ROOT)/kernel/cmain.o \
 	$(SOURCE_ROOT)/kernel/kernel.o
  
 all:

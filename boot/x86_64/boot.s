@@ -93,7 +93,7 @@ EntryPoint:
 	retf
  
 [BITS 64]
-[EXTERN main]
+[EXTERN cmain]
 .Gdt2Ready:
 	mov eax, 0x10
 	mov ds, ax
@@ -106,7 +106,7 @@ EntryPoint:
 	mov rax, Gdtr3
 	lgdt [rax]
  
-	mov rax, main
+	mov rax, cmain
 	call rax
 	cli
 	jmp $

@@ -22,8 +22,11 @@
 
 include $(SOURCE_ROOT)/Rules.inc
 
-all: $(RUST_SOURCES) libcore.rlib
+all: $(RUST_SOURCES) libcore.rlib cmain.o
 	rustc  kernel.rs --target $(SOURCE_ROOT)/x86_64-unix-kernel.json -Z no-landing-pads  --emit=obj  --extern core=libcore.rlib  
+
+cmain.o: cmain.c
+	gcc -c cmain.c
 
 libcore.rlib:
 	rustc --crate-type lib --target $(SOURCE_ROOT)/x86_64-unix-kernel.json /home/ckk/Documents/rust-nightly/src/libcore/lib.rs --crate-name core
