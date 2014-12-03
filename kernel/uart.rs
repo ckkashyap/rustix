@@ -30,6 +30,7 @@ use core::str::StrPrelude;
 const COM1 : u16 = 0x3f8;
 static mut uartInitialized : bool = false;
 
+
 pub fn early_init () { 
 	outb(COM1+2 , 0);
 	outb(COM1+3, 0x80);    // Unlock divisor
@@ -54,6 +55,6 @@ pub fn early_init () {
 
 fn uart_putc(text: &str) {
 	for b in text.bytes() {
-		outb(COM1, 67);
+		outb(COM1, b);
 	}
 }
