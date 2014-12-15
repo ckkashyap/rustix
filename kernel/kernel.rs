@@ -45,7 +45,7 @@ fn kashyap () {
 }
 
 #[no_mangle]
-pub extern "C" fn main()  {
+pub extern "C" fn cmain()  {
 	loop {
 		kashyap();
 	}

@@ -22,7 +22,7 @@
 
 include $(SOURCE_ROOT)/Rules.inc
 
-all: $(RUST_SOURCES) libcore.rlib cmain.o
+all: $(RUST_SOURCES) libcore.rlib
 	rustc  kernel.rs --target $(SOURCE_ROOT)/x86_64-unix-kernel.json -Z no-landing-pads  --emit=obj  --extern core=libcore.rlib  
 
 cmain.o: cmain.c
