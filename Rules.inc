@@ -26,34 +26,9 @@ ifeq ($(OS), Darwin)
 LD=$(LINKEDITOR)
 endif
 
-INCLUDE=-I. -I $(SOURCE_ROOT)/include
-CC=gcc
-
 AT=@
 
-RUST_SOURCES=$(wildcard *.rs)
-C_SOURCES=$(wildcard *.c) 
-ASM_SOURCES=$(wildcard *.s)
-SOURCES=$(C_SOURCES) $(ASM_SOURCES)
-C_OBJECTS=$(patsubst %.c,%.o,$(C_SOURCES))
-RUST_OBJECTS=$(patsubst %.rs,%.o,$(RUST_SOURCES))
-ASM_OBJECTS=$(patsubst %.s,%.o,$(ASM_SOURCES))
-OBJECTS=$(C_OBJECTS) $(ASM_OBJECTS) $(RUST_OBJECTS)
 
-CFLAGS= -O0 -static -Wall -nostartfiles -nostdlib       \
-	-nodefaultlibs -nostdinc -fno-builtin           \
-	-DKERNEL_VERSION="\"$(KERNEL_VERSION)\""        \
-	-D_KERNEL_ -I$(INCLUDE)
-
-%o:%rs
-	@echo "$<"
-	rustc  $<  --target $(SOURCE_ROOT)/x86_64-avery-kernel.json -Z no-landing-pads  --emit=obj
-%o:%c
-	@echo "$<"
-	$(AT)$(CC) -c $(CFLAGS) $< -o $@
-%o:%s
-	@echo "$<"
-	$(AT)nasm -felf64 $< -o $@
 
 dummy: all
 	
@@ -62,9 +37,4 @@ process_sub_dirs:
 
 clean_sub_dirs:
 	$(AT)for file in $(SUB_DIRS); do make SOURCE_ROOT=$(SOURCE_ROOT) -C $$file clean; done
-
-library: $(OBJECTS)
-	$(AT)ar -rc $(SOURCE_ROOT)/kernel/`basename $$PWD`.a $(OBJECTS)
-
-LIBRARIES=$(patsubst %,%.a,$(SUB_DIRS))
 

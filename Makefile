@@ -28,6 +28,10 @@ all:
 iso: all
 	make SOURCE_ROOT=$$PWD -C staging iso
 
+
+reinstall_rust:
+	make SOURCE_ROOT=$$PWD -C tools reinstall_rust
+
 run:
 	qemu-system-x86_64 -kernel staging/kernel.sys -serial stdio -vnc :1
 
