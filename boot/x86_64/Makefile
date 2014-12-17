@@ -23,7 +23,7 @@
 include $(SOURCE_ROOT)/Rules.inc
 
 
-all: $(OBJECTS) process_sub_dirs
+all: boot.o process_sub_dirs
 
 
 clean: 
