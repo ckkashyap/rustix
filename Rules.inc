@@ -29,8 +29,13 @@ endif
 AT=@
 
 
+LIB_RS=$(SOURCE_ROOT)/rust-nightly/src/libcore/lib.rs
 
 dummy: all
+
+%o:%s
+	@echo "$<"
+	$(AT)nasm -felf64 $< -o $@
 	
 process_sub_dirs:
 	$(AT)for file in $(SUB_DIRS); do make SOURCE_ROOT=$(SOURCE_ROOT) -C $$file; done
