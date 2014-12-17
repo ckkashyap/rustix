@@ -29,7 +29,7 @@ cmain.o: cmain.c
 	gcc -c cmain.c
 
 libcore.rlib:
-	rustc --crate-type lib --target $(SOURCE_ROOT)/x86_64-unix-kernel.json /home/ckk/Documents/rust-nightly/src/libcore/lib.rs --crate-name core
+	rustc --crate-type lib --target $(SOURCE_ROOT)/x86_64-unix-kernel.json $(LIB_RS) --crate-name core
 
 clean:
 	rm -f kernel.o
