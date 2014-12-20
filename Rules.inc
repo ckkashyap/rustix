@@ -29,7 +29,7 @@ endif
 AT=@
 
 
-LIB_RS=$(SOURCE_ROOT)/rust-nightly/src/libcore/lib.rs
+LIB_RS=$(SOURCE_ROOT)/tools/rust-nightly/src/libcore/lib.rs
 
 dummy: all
 
