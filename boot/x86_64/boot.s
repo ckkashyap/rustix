@@ -119,6 +119,91 @@ memset:
         rep stosb
         ret
 
+; DUMMY START
+
+global memcpy
+memcpy:
+        ret
+global pow
+pow:
+        ret
+global memcmp
+memcmp:
+        ret
+global fmod
+fmod:
+        ret
+global fmodf
+fmodf:
+        ret
+global log10
+log10:
+        ret
+global log2
+log2:
+        ret
+global log
+log:
+        ret
+global exp
+exp:
+        ret
+global exp2
+exp2:
+        ret
+global fma
+fma:
+        ret
+global trunc
+trunc:
+        ret
+global round
+round:
+        ret
+global ceil
+ceil:
+        ret
+global floor
+floor:
+        ret
+global log10f
+log10f:
+        ret
+global log2f
+log2f:
+        ret
+global expf
+expf:
+        ret
+global exp2f
+exp2f:
+        ret
+global powf
+powf:
+        ret
+global logf
+logf:
+        ret
+global roundf
+roundf:
+        ret
+global fmaf
+fmaf:
+        ret
+global truncf
+truncf:
+        ret
+
+global ceilf
+ceilf:
+        ret
+
+global floorf
+floorf:
+        ret
+; DUMMY END
+
+
 
 [BITS 32]
 [EXTERN Pml4]
