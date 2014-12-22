@@ -23,13 +23,13 @@
 include $(SOURCE_ROOT)/Rules.inc
 
 all: $(RUST_SOURCES) libcore.rlib
-	rustc  kernel.rs --target $(SOURCE_ROOT)/x86_64-unix-kernel.json -Z no-landing-pads  --emit=obj  --extern core=libcore.rlib  
+	$(RUSTC)  kernel.rs --target $(SOURCE_ROOT)/x86_64-unix-kernel.json -Z no-landing-pads  --extern core=libcore.rlib -L $(LIBCOMPILER_PATH) 
 
 cmain.o: cmain.c
 	gcc -c cmain.c
 
 libcore.rlib:
-	rustc --crate-type lib --target $(SOURCE_ROOT)/x86_64-unix-kernel.json $(LIB_RS) --crate-name core
+	$(RUSTC) --crate-type lib --target $(SOURCE_ROOT)/x86_64-unix-kernel.json $(LIB_RS) --crate-name core
 
 clean:
-	rm -f kernel.o
+	rm -f libkernel.a

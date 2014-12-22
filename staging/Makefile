@@ -5,7 +5,8 @@ include $(SOURCE_ROOT)/Rules.inc
 ISO := os.iso
 
 OBJECTS=$(SOURCE_ROOT)/boot/x86_64/boot.o \
-	$(SOURCE_ROOT)/kernel/kernel.o
+	$(LIBCOMPILER_PATH)/libcompiler-rt.a \
+	$(SOURCE_ROOT)/kernel/libkernel.a
  
 all:
 	$(LD) -nodefaultlibs -Tlinker.ld -o kernel.sys --start-group $(OBJECTS) --end-group 
