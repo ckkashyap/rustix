@@ -23,7 +23,7 @@
 use super::x86asm::outb;
 use super::x86asm::inb;
 
-use core::str::StrPrelude;
+use core::str::StrExt;
 
 
 
