@@ -22,13 +22,14 @@
 
 use super::x86asm::outb;
 use super::x86asm::inb;
+use super::picirq::pic_enable;
 
 use core::str::StrExt;
 
 
 
 const COM1 : u16 = 0x3f8;
-static mut uartInitialized : bool = false;
+static mut uart_initialized : bool = false;
 
 
 pub fn early_init () { 
@@ -46,15 +47,40 @@ pub fn early_init () {
 	}
 
 	unsafe {
-		uartInitialized = true;
+		uart_initialized = true;
 	}
 
-	outb(COM1, 65);
-	uart_putc("123456");
+	uart_put_str("xv6 initizing...\n");
 }
 
-fn uart_putc(text: &str) {
+
+
+fn uartinit()
+{
+	unsafe {
+		if !uart_initialized {
+			return;
+		}
+	}
+
+	// Acknowledge pre-existing interrupt conditions;
+	// enable interrupts.
+	inb(COM1+2);
+	inb(COM1+0);
+	pic_enable(0);
+	//ioapicenable(IRQ_COM1, 0);
+}
+
+
+fn uart_put_str(text: &str) {
 	for b in text.bytes() {
 		outb(COM1, b);
 	}
+}
+
+
+
+
+fn uart_putc(byte : u8) {
+	outb(COM1, byte);
 }

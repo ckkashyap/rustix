@@ -20,39 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+use super::x86asm::outb;
+use super::x86asm::inb;
 
 
-#![crate_name = "kernel"]
-#![crate_type = "staticlib"]
-#![feature(lang_items, asm)]
-#![no_std]
-#[lang="sized"]
-#[lang="sync"]
 
-extern crate core;
-
-mod uart;
-mod x86asm;
-mod picirq;
-
-
-fn kashyap () {
-	unsafe {
-		*((0xb8000 ) as *mut u8) = 65;
-		*((0xb8001 ) as *mut u8) = 0x6;
-		asm!("mov $$0xff, %eax" : /* no outputs */ : /* no inputs */ : "eax");
-	}
-	uart::early_init();
+pub fn pic_enable(irq : u8)
+{
+	  //pic_setmask(irqmask & ~(1<<irq)); TODO
 }
 
-#[no_mangle]
-pub extern "C" fn cmain()  {
-	loop {
-		kashyap();
-	}
-        //return 255;
-}
 
-#[lang = "stack_exhausted"] extern fn stack_exhausted() { loop {} }
-#[lang = "eh_personality"] extern fn eh_personality() {loop {} }
-#[lang = "panic_fmt"] fn panic_fmt() -> ! { loop {} }
