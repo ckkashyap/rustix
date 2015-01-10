@@ -28,11 +28,12 @@ endif
 
 AT=@
 
+RUST_SOURCE=/home/extempore/Documents/RUST/rust
 
-LIB_RS=/home/ckk/Documents/RUST/rust/src/libcore/lib.rs
+LIB_RS=$(RUST_SOURCE)/src/libcore/lib.rs
 
-RUSTC=LD_LIBRARY_PATH=/home/ckk/Documents/RUST/install/lib /home/ckk/Documents/RUST/install/bin/rustc
-LIBCOMPILER_PATH=/home/ckk/Documents/RUST/install/lib/rustlib/x86_64-unknown-linux-gnu/lib
+RUSTC=LD_LIBRARY_PATH=$(RUST_SOURCE)/../install/lib $(RUST_SOURCE)/../install/bin/rustc
+LIBCOMPILER_PATH=$(RUST_SOURCE)/../install/lib/rustlib/x86_64-unknown-linux-gnu/lib
 
 dummy: all
 
