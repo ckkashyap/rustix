@@ -34,6 +34,8 @@ extern crate core;
 mod uart;
 mod x86asm;
 mod picirq;
+mod traps;
+
 
 
 fn kashyap () {
