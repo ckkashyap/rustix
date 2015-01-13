@@ -35,6 +35,8 @@ mod uart;
 mod x86asm;
 mod picirq;
 mod traps;
+mod spinlock;
+mod kalloc;
 
 
 

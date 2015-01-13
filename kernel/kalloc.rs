@@ -20,32 +20,24 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-use super::x86asm::outb;
-use super::x86asm::inb;
+use super::spinlock::spinlock;
+use super::spinlock::dummy;
+use super::spinlock::init_lock;
 
-const IO_PIC1 : u16 = 0x20;// Master (IRQs 0-7)
-const IO_PIC2 : u16 = 0xA0;// Slave (IRQs 8-15)
-
-const IRQ_SLAVE : u16 = 2;// IRQ at which slave connects to master
-
-static mut irq_mask : u16 = 0xFFFF & !( 1 << (IRQ_SLAVE as usize));
-
-pub fn pic_setmask(mask : u16)
-{
-	unsafe {
-		irq_mask = mask;
-	}
-	outb(IO_PIC1+1, mask as u8); // TODO - check out a better way to do it
-	outb(IO_PIC2+1, (mask >> 8) as u8);
+struct kmem_t{
+lock: spinlock,
+	    // TODO int use_lock;
+	    // TODO  struct run *freelist;
 }
 
 
+static mut kmem : kmem_t = kmem_t { lock: dummy} ;
 
-pub fn pic_enable(irq : u8)
+
+
+pub fn kinit1(vstart: u64, vend: u64)
 {
-	unsafe {
-		pic_setmask(irq_mask & !(1 << irq as usize));
-	}
+	//init_lock(&kmem.lock, "kmem");
+	//kmem.use_lock = 0;
+	//freerange(vstart, vend);
 }
-
-
