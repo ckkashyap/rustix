@@ -24,58 +24,10 @@ use super::spinlock::spinlock;
 use super::spinlock::dummy_lock;
 use super::spinlock::init_lock;
 use super::uart::uart_put_str;
-use super::mmu::address;
-use super::mmu::pg_roundup;
-use super::mmu::pg_size;
 
-struct kmem_t{
-lock: spinlock,
-use_lock: u32 , //TODO is u32 the right type?
-	    // TODO  struct run *freelist;
-}
+pub type address = u64;
+pub const pg_size : address = 4096;
 
-
-static mut kmem : kmem_t = kmem_t { lock: dummy_lock, use_lock: 0} ;
-
-
-pub fn kinit1(vstart: address, vend: address) {
-	unsafe {
-		init_lock(& mut kmem.lock, "kmem");
-		kmem.use_lock = 0;
-	}
-	free_range(vstart, vend);
-}
-
-fn free_range(vstart: address, vend: address) {
-	let mut address = pg_roundup(vstart);
-	loop {
-		kfree(address);
-		address = address + pg_size;
-		if address > vend {
-			break;
-		}
-	}
-}
-
-fn kfree(a : address){
-/*
-	struct run *r;
-
-	if((uintp)v % PGSIZE || v < end || v2p(v) >= PHYSTOP)
-		panic("kfree");
-
-	// Fill with junk to catch dangling refs.
-	memset(v, 1, PGSIZE);
-
-	if(kmem.use_lock)
-		acquire(&kmem.lock);
-	r = (struct run*)v;
-	r->next = kmem.freelist;
-	kmem.freelist = r;
-	if(kmem.use_lock)
-		release(&kmem.lock);
-
-
-
-		*/
+pub fn pg_roundup(sz: address) -> address {
+	sz + (pg_size - 1) & ! (pg_size - 1)
 }

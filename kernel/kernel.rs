@@ -37,6 +37,7 @@ mod picirq;
 mod traps;
 mod spinlock;
 mod kalloc;
+mod mmu;
 
 
 fn kashyap () {
