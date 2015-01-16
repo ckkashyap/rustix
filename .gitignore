@@ -1,5 +1,6 @@
 # Compiled files
 *.o
+*.a
 *.so
 *.rlib
 *.dll
