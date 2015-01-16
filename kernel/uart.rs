@@ -25,7 +25,7 @@ use super::x86asm::inb;
 use super::picirq::pic_enable;
 use super::traps::IRQ_COM1;
 
-use core::str::StrExt;
+use core::prelude::*;
 
 
 
@@ -73,9 +73,13 @@ fn uartinit()
 }
 
 
-fn uart_put_str(text: &str) {
+pub fn uart_put_str(text: &str) {
 	for b in text.bytes() {
 		outb(COM1, b);
+	}
+	let x = [65, 66, 67, 10];
+	for e in x.iter() {
+		uart_putc(*e as u8);
 	}
 }
 

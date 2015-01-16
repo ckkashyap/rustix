@@ -21,7 +21,6 @@
 # SOFTWARE.
 
 all:
-	make SOURCE_ROOT=$$PWD -C boot/x86_64
 	make SOURCE_ROOT=$$PWD -C kernel
 	make SOURCE_ROOT=$$PWD -C staging
 
@@ -33,9 +32,8 @@ reinstall_rust:
 	make SOURCE_ROOT=$$PWD -C tools reinstall_rust
 
 run:
-	qemu-system-x86_64 -kernel staging/kernel.sys -serial stdio -vnc :1
+	qemu-system-x86_64 -kernel staging/kernel.sys -serial stdio -vnc :1 -no-reboot -d int
 
 clean:
-	make SOURCE_ROOT=$$PWD -C boot/x86_64 clean
 	make SOURCE_ROOT=$$PWD -C kernel clean
 	make SOURCE_ROOT=$$PWD -C staging clean

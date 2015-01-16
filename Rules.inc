@@ -21,6 +21,7 @@
 # SOFTWARE.
 
 LD=ld
+OBJDUMP=objdump
 OS=$(shell uname)
 ifeq ($(OS), Darwin)
 LD=$(LINKEDITOR)
@@ -28,7 +29,7 @@ endif
 
 AT=@
 
-RUST_SOURCE=/home/extempore/Documents/RUST/rust
+RUST_SOURCE=/home/ckk/Documents/RUST/rust
 
 LIB_RS=$(RUST_SOURCE)/src/libcore/lib.rs
 

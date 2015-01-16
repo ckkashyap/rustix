@@ -39,7 +39,6 @@ mod spinlock;
 mod kalloc;
 
 
-
 fn kashyap () {
 	unsafe {
 		*((0xb8000 ) as *mut u8) = 65;
@@ -47,12 +46,13 @@ fn kashyap () {
 		asm!("mov $$0xff, %eax" : /* no outputs */ : /* no inputs */ : "eax");
 	}
 	uart::early_init();
+	kalloc::kinit1(0,0);
 }
 
 #[no_mangle]
 pub extern "C" fn cmain()  {
 	loop {
-		kashyap();
+	kashyap();
 	}
         //return 255;
 }

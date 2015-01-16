@@ -30,10 +30,10 @@ pub struct spinlock {
 	//TODO cpu 
 }
 
-pub const dummy : spinlock = spinlock {locked:0, name:"AA" } ;
+pub const dummy_lock : spinlock = spinlock {locked:0, name:"" } ;
 
 
-pub fn init_lock(lk : &mut spinlock, name : &'static str )
+pub fn init_lock(lk : & mut spinlock, name : &'static str )
 {
 	lk.name = name;
 	lk.locked = 0;

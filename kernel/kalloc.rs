@@ -21,23 +21,25 @@
 // SOFTWARE.
 
 use super::spinlock::spinlock;
-use super::spinlock::dummy;
+use super::spinlock::dummy_lock;
 use super::spinlock::init_lock;
+use super::uart::uart_put_str;
 
 struct kmem_t{
 lock: spinlock,
-	    // TODO int use_lock;
+use_lock: u32 , //TODO is u32 the right type?
 	    // TODO  struct run *freelist;
 }
 
 
-static mut kmem : kmem_t = kmem_t { lock: dummy} ;
-
+static mut kmem : kmem_t = kmem_t { lock: dummy_lock, use_lock: 0} ;
 
 
 pub fn kinit1(vstart: u64, vend: u64)
 {
-	//init_lock(&kmem.lock, "kmem");
-	//kmem.use_lock = 0;
+	unsafe {
+		init_lock(& mut kmem.lock, "kmem");
+		kmem.use_lock = 0;
+	}
 	//freerange(vstart, vend);
 }
