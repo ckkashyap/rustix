@@ -29,7 +29,7 @@ endif
 
 AT=@
 
-RUST_SOURCE=/home/ckk/Documents/RUST/rust
+RUST_SOURCE=/home/kashyap/Documents/RUST/rust
 
 LIB_RS=$(RUST_SOURCE)/src/libcore/lib.rs
 

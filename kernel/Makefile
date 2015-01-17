@@ -23,7 +23,7 @@
 include $(SOURCE_ROOT)/Rules.inc
 
 all: $(RUST_SOURCES) libcore.rlib
-	$(RUSTC) -C no-stack-check kernel.rs  --extern core=libcore.rlib -L $(LIBCOMPILER_PATH) 
+	$(RUSTC) -C no-stack-check kernel.rs  --extern core=libcore.rlib 
 
 cmain.o: cmain.c
 	gcc -c cmain.c
