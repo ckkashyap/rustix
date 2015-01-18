@@ -20,28 +20,34 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+
+
+RUST_ROOT=$(HOME)/Documents/RUST
+
+
 LD=ld
 AR=ar
 QEMU=qemu-system-x86_64 -kernel staging/kernel.sys -serial stdio -vnc :1 -no-reboot -d int
-LD_LIBRARY_PATH=LD_LIBRARY_PATH
-RUSTDIR=/Users/kashyap/Documents/RUST/rust-nightly-x86_64-apple-darwin
+LINUX_TARGET=x86_64-unknown-linux-gnu
+MAC_TARGET=x86_64-apple-darwin
+LINUX_RUST_DIR=$(RUST_ROOT)/rust-nightly-$(LINUX_TARGET)
+MAC_RUST_DIR=$(RUST_ROOT)/rust-nightly-$(MAC_TARGET)
+RUST_DIR=$(LINUX_RUST_DIR)
 OBJDUMP=objdump
+RUSTC=LD_LIBRARY_PATH=$(LINUX_RUST_DIR)/lib $(LINUX_RUST_DIR)/bin/rustc
+
+
 OS=$(shell uname)
 ifeq ($(OS), Darwin)
 LD=$(LINKEDITOR)
 AR=$(ARCHIVE)
 LD_LIBRARY_PATH=DYLD_LIBRARY_PATH
 QEMU=qemu-system-x86_64 -kernel staging/kernel.sys -serial stdio -no-reboot -d int
+RUST_DIR=$(MAC_RUST_DIR)
+RUSTC=DYLD_LIBRARY_PATH=$(MAC_RUST_DIR)/lib $(MAC_RUST_DIR)/bin/rustc
 endif
 
 AT=@
-
-RUST_SOURCE=$(HOME)/Documents/RUST/rust
-
-LIB_RS=$(RUST_SOURCE)/src/libcore/lib.rs
-
-RUSTC=$(LD_LIBRARY_PATH)=$(RUSTDIR)/lib $(RUSTDIR)/bin/rustc
-LIBCOMPILER_PATH=$(SOURCE_ROOT)
 
 dummy: all
 

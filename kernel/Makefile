@@ -21,14 +21,19 @@
 # SOFTWARE.
 
 include $(SOURCE_ROOT)/Rules.inc
-TARGET=x86_64-unknown-linux-gnu
 
-all: $(RUST_SOURCES) libcore.rlib
-	$(RUSTC) --target=$(TARGET) -C no-stack-check kernel.rs  --extern core=libcore.rlib -L$(SOURCE_ROOT)
+all: libcore.rlib libcompiler-rt.a libmorestack.a
+	$(RUSTC) --target=$(LINUX_TARGET) -C no-stack-check kernel.rs  --extern core=libcore.rlib -L.
 
 libcore.rlib:
-	cp $(RUSTDIR)/lib/rustlib/i$(TARGET)/lib/libcore-*.rlib kernel/libcore.rlib
+	cp $(LINUX_RUST_DIR)/lib/rustlib/$(LINUX_TARGET)/lib/libcore-*.rlib libcore.rlib
 	#$(RUSTC) --target=$(TARGET) -C no-stack-check --crate-type lib $(LIB_RS) --crate-name core
+
+libcompiler-rt.a:
+	cp $(LINUX_RUST_DIR)/lib/rustlib/$(LINUX_TARGET)/lib/libcompiler-rt.a .
+
+libmorestack.a:
+	cp $(LINUX_RUST_DIR)/lib/rustlib/$(LINUX_TARGET)/lib/libmorestack.a .
 
 clean:
 	rm -f libkernel.a
