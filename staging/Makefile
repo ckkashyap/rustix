@@ -8,7 +8,9 @@ OBJECTS=$(SOURCE_ROOT)/boot/x86_64/boot.o \
 	$(SOURCE_ROOT)/kernel/libkernel.a
  
 all:
-	$(LD) -m elf_x86_64 -nodefaultlibs -T $(SOURCE_ROOT)/boot/x86_64/kernel64.ld -o kernel.sys $(SOURCE_ROOT)/boot/x86_64/entry64.o $(SOURCE_ROOT)/boot/x86_64/main.o $(SOURCE_ROOT)/kernel/libkernel.a -b binary $(SOURCE_ROOT)/boot/x86_64/initcode $(SOURCE_ROOT)/boot/x86_64/entryother
+	mkdir temp && cd temp && $(AR) x $(SOURCE_ROOT)/kernel/libkernel.a
+	$(LD) -m elf_x86_64 -nodefaultlibs -T $(SOURCE_ROOT)/boot/x86_64/kernel64.ld -o kernel.sys $(SOURCE_ROOT)/boot/x86_64/entry64.o $(SOURCE_ROOT)/boot/x86_64/main.o temp/kernel.o -b binary $(SOURCE_ROOT)/boot/x86_64/initcode $(SOURCE_ROOT)/boot/x86_64/entryother
+	rm -rf temp
 #$(LD) -nodefaultlibs -z max-page-size=0x1000 -Tlinker.ld -o kernel.sys --start-group $(OBJECTS) --end-group 
 
 

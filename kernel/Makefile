@@ -24,10 +24,11 @@ include $(SOURCE_ROOT)/Rules.inc
 TARGET=x86_64-unknown-linux-gnu
 
 all: $(RUST_SOURCES) libcore.rlib
-	$(RUSTC) --target=$(TARGET) -C no-stack-check kernel.rs  --extern core=libcore.rlib
+	$(RUSTC) --target=$(TARGET) -C no-stack-check kernel.rs  --extern core=libcore.rlib -L$(SOURCE_ROOT)
 
 libcore.rlib:
-	$(RUSTC) --target=$(TARGET) -C no-stack-check --crate-type lib $(LIB_RS) --crate-name core
+	cp $(RUSTDIR)/lib/rustlib/i$(TARGET)/lib/libcore-*.rlib kernel/libcore.rlib
+	#$(RUSTC) --target=$(TARGET) -C no-stack-check --crate-type lib $(LIB_RS) --crate-name core
 
 clean:
 	rm -f libkernel.a

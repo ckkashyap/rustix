@@ -21,12 +21,17 @@
 # SOFTWARE.
 
 LD=ld
+AR=ar
+QEMU=qemu-system-x86_64 -kernel staging/kernel.sys -serial stdio -vnc :1 -no-reboot -d int
 LD_LIBRARY_PATH=LD_LIBRARY_PATH
+RUSTDIR=/Users/kashyap/Documents/RUST/rust-nightly-x86_64-apple-darwin
 OBJDUMP=objdump
 OS=$(shell uname)
 ifeq ($(OS), Darwin)
 LD=$(LINKEDITOR)
+AR=$(ARCHIVE)
 LD_LIBRARY_PATH=DYLD_LIBRARY_PATH
+QEMU=qemu-system-x86_64 -kernel staging/kernel.sys -serial stdio -no-reboot -d int
 endif
 
 AT=@
@@ -35,8 +40,7 @@ RUST_SOURCE=$(HOME)/Documents/RUST/rust
 
 LIB_RS=$(RUST_SOURCE)/src/libcore/lib.rs
 
-RUSTC=$(LD_LIBRARY_PATH)=$(RUST_SOURCE)/../install/lib $(RUST_SOURCE)/../install/bin/rustc
-#LIBCOMPILER_PATH=$(RUST_SOURCE)/../install/lib/rustlib/x86_64-apple-darwin/lib
+RUSTC=$(LD_LIBRARY_PATH)=$(RUSTDIR)/lib $(RUSTDIR)/bin/rustc
 LIBCOMPILER_PATH=$(SOURCE_ROOT)
 
 dummy: all

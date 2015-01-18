@@ -20,6 +20,8 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+include Rules.inc
+
 all:
 	make SOURCE_ROOT=$$PWD -C kernel
 	make SOURCE_ROOT=$$PWD -C staging
@@ -32,7 +34,7 @@ reinstall_rust:
 	make SOURCE_ROOT=$$PWD -C tools reinstall_rust
 
 run:
-	qemu-system-x86_64 -kernel staging/kernel.sys -serial stdio -vnc :1 -no-reboot -d int
+	$(QEMU)
 
 clean:
 	make SOURCE_ROOT=$$PWD -C kernel clean
