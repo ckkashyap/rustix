@@ -21,19 +21,21 @@
 # SOFTWARE.
 
 LD=ld
+LD_LIBRARY_PATH=LD_LIBRARY_PATH
 OBJDUMP=objdump
 OS=$(shell uname)
 ifeq ($(OS), Darwin)
 LD=$(LINKEDITOR)
+LD_LIBRARY_PATH=DYLD_LIBRARY_PATH
 endif
 
 AT=@
 
-RUST_SOURCE=/Users/kashyap/Documents/RUST/rust-fork
+RUST_SOURCE=$(HOME)/Documents/RUST/rust
 
 LIB_RS=$(RUST_SOURCE)/src/libcore/lib.rs
 
-RUSTC=DYLD_LIBRARY_PATH=$(RUST_SOURCE)/../install/lib $(RUST_SOURCE)/../install/bin/rustc
+RUSTC=$(LD_LIBRARY_PATH)=$(RUST_SOURCE)/../install/lib $(RUST_SOURCE)/../install/bin/rustc
 #LIBCOMPILER_PATH=$(RUST_SOURCE)/../install/lib/rustlib/x86_64-apple-darwin/lib
 LIBCOMPILER_PATH=$(SOURCE_ROOT)
 
