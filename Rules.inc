@@ -29,12 +29,13 @@ endif
 
 AT=@
 
-RUST_SOURCE=/home/kashyap/Documents/RUST/rust
+RUST_SOURCE=/Users/kashyap/Documents/RUST/rust-fork
 
 LIB_RS=$(RUST_SOURCE)/src/libcore/lib.rs
 
-RUSTC=LD_LIBRARY_PATH=$(RUST_SOURCE)/../install/lib $(RUST_SOURCE)/../install/bin/rustc
-LIBCOMPILER_PATH=$(RUST_SOURCE)/../install/lib/rustlib/x86_64-unknown-linux-gnu/lib
+RUSTC=DYLD_LIBRARY_PATH=$(RUST_SOURCE)/../install/lib $(RUST_SOURCE)/../install/bin/rustc
+#LIBCOMPILER_PATH=$(RUST_SOURCE)/../install/lib/rustlib/x86_64-apple-darwin/lib
+LIBCOMPILER_PATH=$(SOURCE_ROOT)
 
 dummy: all
 
