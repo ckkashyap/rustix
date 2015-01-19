@@ -1,17 +1,17 @@
 // The MIT License (MIT)
-// 
+//
 // Copyright (c) 2015 Kashyap
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,16 +20,16 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-use super::spinlock::spinlock;
+use super::spinlock::Spinlock;
 use super::spinlock::dummy_lock;
 use super::spinlock::init_lock;
 use super::uart::uart_put_str;
-use super::mmu::address;
+use super::mmu::Address;
 use super::mmu::pg_roundup;
-use super::mmu::pg_size;
+use super::mmu::PG_SIZE;
 
 struct kmem_t{
-lock: spinlock,
+lock: Spinlock,
 use_lock: u32 , //TODO is u32 the right type?
 	    // TODO  struct run *freelist;
 }
@@ -38,7 +38,7 @@ use_lock: u32 , //TODO is u32 the right type?
 static mut kmem : kmem_t = kmem_t { lock: dummy_lock, use_lock: 0} ;
 
 
-pub fn kinit1(vstart: address, vend: address) {
+pub fn kinit1(vstart: Address, vend: Address) {
 	unsafe {
 		init_lock(& mut kmem.lock, "kmem");
 		kmem.use_lock = 0;
@@ -46,18 +46,18 @@ pub fn kinit1(vstart: address, vend: address) {
 	free_range(vstart, vend);
 }
 
-fn free_range(vstart: address, vend: address) {
+fn free_range(vstart: Address, vend: Address) {
 	let mut address = pg_roundup(vstart);
 	loop {
 		kfree(address);
-		address = address + pg_size;
+		address = address + PG_SIZE;
 		if address > vend {
 			break;
 		}
 	}
 }
 
-fn kfree(a : address){
+fn kfree(a : Address){
 /*
 	struct run *r;
 
