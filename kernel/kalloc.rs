@@ -22,7 +22,9 @@
 
 use super::spinlock::{Spinlock, DUMMY_LOCK, init_lock};
 use super::mmu::{Address, PG_SIZE, pg_roundup};
+use super::memlayout::{v2p,PHYSTOP};
 use super::uart::uart_put_str;
+use super::console::panic;
 
 struct KmemT {
     lock: Spinlock,
@@ -65,12 +67,20 @@ fn free_range(vstart: Address, vend: Address) {
 }
 
 fn kfree(v : Address) {
+    //struct run *r;
 
-	//struct run *r;
+    if ((v % PG_SIZE) > 0) || (v2p(v) >= PHYSTOP) {
+	panic("kfree");
+    }
 
-//	if(v % PG_SIZE || v < end || v2p(v) >= PHYSTOP)
-//		panic("kfree");
-//
+    unsafe {
+        if v < end {
+            panic("kfree");
+        }
+    }
+
+    
+
 //	// Fill with junk to catch dangling refs.
 //	memset(v, 1, PGSIZE);
 //

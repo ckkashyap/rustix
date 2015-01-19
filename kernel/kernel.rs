@@ -39,6 +39,7 @@ mod spinlock;
 mod kalloc;
 mod mmu;
 mod memlayout;
+mod console;
 
 
 fn main (end : u64) {
@@ -58,6 +59,68 @@ pub extern "C" fn cmain(end : u64)  {
 	}
         //return 255;
 }
+
+
+
+// Dummy functions to take care of missing libc function
+#[no_mangle]
+pub extern "C" fn trunc()  {}
+#[no_mangle]
+pub extern "C" fn truncf()  {}
+#[no_mangle]
+pub extern "C" fn floor()  {}
+#[no_mangle]
+pub extern "C" fn floorf()  {}
+#[no_mangle]
+pub extern "C" fn pow()  {}
+#[no_mangle]
+pub extern "C" fn powf()  {}
+#[no_mangle]
+pub extern "C" fn fmod()  {}
+#[no_mangle]
+pub extern "C" fn fmodf()  {}
+#[no_mangle]
+pub extern "C" fn log10()  {}
+#[no_mangle]
+pub extern "C" fn log10f()  {}
+#[no_mangle]
+pub extern "C" fn memcpy()  {}
+#[no_mangle]
+pub extern "C" fn memcmp()  {}
+#[no_mangle]
+pub extern "C" fn log()  {}
+#[no_mangle]
+pub extern "C" fn logf()  {}
+#[no_mangle]
+pub extern "C" fn log2()  {}
+#[no_mangle]
+pub extern "C" fn log2f()  {}
+#[no_mangle]
+pub extern "C" fn round()  {}
+#[no_mangle]
+pub extern "C" fn roundf()  {}
+#[no_mangle]
+pub extern "C" fn exp()  {}
+#[no_mangle]
+pub extern "C" fn expf()  {}
+#[no_mangle]
+pub extern "C" fn exp2()  {}
+#[no_mangle]
+pub extern "C" fn exp2f()  {}
+#[no_mangle]
+pub extern "C" fn ceil()  {}
+#[no_mangle]
+pub extern "C" fn ceilf()  {}
+#[no_mangle]
+pub extern "C" fn fma()  {}
+#[no_mangle]
+pub extern "C" fn fmaf()  {}
+#[no_mangle]
+pub extern "C" fn __powisf2()  {}
+#[no_mangle]
+pub extern "C" fn __powidf2()  {}
+
+
 
 #[lang = "stack_exhausted"] extern fn stack_exhausted() { loop {} }
 #[lang = "eh_personality"] extern fn eh_personality() {loop {} }
