@@ -20,9 +20,7 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-use super::spinlock::Spinlock;
-use super::spinlock::dummy_lock;
-use super::spinlock::init_lock;
+use super::spinlock::{Spinlock, DUMMY_LOCK, init_lock};
 use super::uart::uart_put_str;
 
 pub type Address = u64;

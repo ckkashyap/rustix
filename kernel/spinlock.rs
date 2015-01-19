@@ -30,7 +30,7 @@ pub struct Spinlock {
 	//TODO cpu
 }
 
-pub const dummy_lock: Spinlock = Spinlock {locked:0, name:"" } ;
+pub const DUMMY_LOCK: Spinlock = Spinlock {locked:0, name:"" } ;
 
 
 pub fn init_lock(lk : &mut Spinlock, name : &'static str )

@@ -20,23 +20,18 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-use super::spinlock::Spinlock;
-use super::spinlock::dummy_lock;
-use super::spinlock::init_lock;
+use super::spinlock::{Spinlock, DUMMY_LOCK, init_lock};
+use super::mmu::{Address, PG_SIZE, pg_roundup};
 use super::uart::uart_put_str;
-use super::mmu::Address;
-use super::mmu::pg_roundup;
-use super::mmu::PG_SIZE;
 
-struct kmem_t{
-lock: Spinlock,
-use_lock: u32 , //TODO is u32 the right type?
-	    // TODO  struct run *freelist;
+struct KmemT {
+    lock: Spinlock,
+    use_lock: u32 , //TODO is u32 the right type?
+	// TODO  struct run *freelist;
 }
 
 
-static mut kmem : kmem_t = kmem_t { lock: dummy_lock, use_lock: 0} ;
-
+static mut kmem : KmemT = KmemT{ lock: DUMMY_LOCK, use_lock: 0} ;
 
 pub fn kinit1(vstart: Address, vend: Address) {
 	unsafe {
