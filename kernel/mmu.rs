@@ -1,17 +1,17 @@
 // The MIT License (MIT)
-// 
+//
 // Copyright (c) 2015 Kashyap
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all
 // copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -20,14 +20,14 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-use super::spinlock::spinlock;
+use super::spinlock::Spinlock;
 use super::spinlock::dummy_lock;
 use super::spinlock::init_lock;
 use super::uart::uart_put_str;
 
-pub type address = u64;
-pub const pg_size : address = 4096;
+pub type Address = u64;
+pub const PG_SIZE : Address = 4096;
 
-pub fn pg_roundup(sz: address) -> address {
-	sz + (pg_size - 1) & ! (pg_size - 1)
+pub fn pg_roundup(sz: Address) -> Address {
+	sz + (PG_SIZE - 1) & ! (PG_SIZE - 1)
 }

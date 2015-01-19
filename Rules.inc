@@ -1,17 +1,17 @@
 # The MIT License (MIT)
-# 
+#
 # Copyright (c) 2014 Kashyap
-# 
+#
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
 # in the Software without restriction, including without limitation the rights
 # to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 # copies of the Software, and to permit persons to whom the Software is
 # furnished to do so, subject to the following conditions:
-# 
+#
 # The above copyright notice and this permission notice shall be included in all
 # copies or substantial portions of the Software.
-# 
+#
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 # IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 # FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -22,7 +22,7 @@
 
 
 
-RUST_ROOT=$(HOME)/code/nightly/
+RUST_ROOT=$(HOME)/Documents/RUST
 
 
 LD=ld
@@ -41,8 +41,6 @@ OS=$(shell uname)
 ifeq ($(OS), Darwin)
 LD=$(LINKEDITOR)
 AR=$(ARCHIVE)
-LD=/usr/local/gcc-4.8.1-for-linux64/bin/x86_64-pc-linux-ld
-AR=/usr/local/gcc-4.8.1-for-linux64/bin/x86_64-pc-linux-ar
 LD_LIBRARY_PATH=DYLD_LIBRARY_PATH
 QEMU=qemu-system-x86_64 -kernel staging/kernel.sys -serial stdio -no-reboot -d int
 RUST_DIR=$(MAC_RUST_DIR)
@@ -56,10 +54,9 @@ dummy: all
 %o:%s
 	@echo "$<"
 	$(AT)nasm -felf64 $< -o $@
-	
+
 process_sub_dirs:
 	$(AT)for file in $(SUB_DIRS); do make SOURCE_ROOT=$(SOURCE_ROOT) -C $$file; done
 
 clean_sub_dirs:
 	$(AT)for file in $(SUB_DIRS); do make SOURCE_ROOT=$(SOURCE_ROOT) -C $$file clean; done
-
