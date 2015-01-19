@@ -64,61 +64,61 @@ pub extern "C" fn cmain(end : u64)  {
 
 // Dummy functions to take care of missing libc function
 #[no_mangle]
-pub extern "C" fn trunc()  {}
+pub extern "C" fn trunc()  {console::panic("trunc: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn truncf()  {}
+pub extern "C" fn truncf()  {console::panic("truncf: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn floor()  {}
+pub extern "C" fn floor()  {console::panic("floor: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn floorf()  {}
+pub extern "C" fn floorf()  {console::panic("floorf: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn pow()  {}
+pub extern "C" fn pow()  {console::panic("pow: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn powf()  {}
+pub extern "C" fn powf()  {console::panic("powf: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn fmod()  {}
+pub extern "C" fn fmod()  {console::panic("fmod: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn fmodf()  {}
+pub extern "C" fn fmodf()  {console::panic("fmodf: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn log10()  {}
+pub extern "C" fn log10()  {console::panic("log10: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn log10f()  {}
+pub extern "C" fn log10f()  {console::panic("log10f: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn memcpy()  {}
+pub extern "C" fn memcpy()  {console::panic("memcpy: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn memcmp()  {}
+pub extern "C" fn memcmp()  {console::panic("memcmp: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn log()  {}
+pub extern "C" fn log()  {console::panic("log: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn logf()  {}
+pub extern "C" fn logf()  {console::panic("logf: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn log2()  {}
+pub extern "C" fn log2()  {console::panic("log2: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn log2f()  {}
+pub extern "C" fn log2f()  {console::panic("log2f: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn round()  {}
+pub extern "C" fn round()  {console::panic("round: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn roundf()  {}
+pub extern "C" fn roundf()  {console::panic("roundf: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn exp()  {}
+pub extern "C" fn exp()  {console::panic("exp: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn expf()  {}
+pub extern "C" fn expf()  {console::panic("expf: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn exp2()  {}
+pub extern "C" fn exp2()  {console::panic("exp2: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn exp2f()  {}
+pub extern "C" fn exp2f()  {console::panic("exp2f: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn ceil()  {}
+pub extern "C" fn ceil()  {console::panic("ceil: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn ceilf()  {}
+pub extern "C" fn ceilf()  {console::panic("ceilf: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn fma()  {}
+pub extern "C" fn fma()  {console::panic("fma: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn fmaf()  {}
+pub extern "C" fn fmaf()  {console::panic("fmaf: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn __powisf2()  {}
+pub extern "C" fn __powisf2()  {console::panic("__powisf2: console::panic!!!");}
 #[no_mangle]
-pub extern "C" fn __powidf2()  {}
+pub extern "C" fn __powidf2()  {console::panic("__powidf2: console::panic!!!");}
 
 
 
