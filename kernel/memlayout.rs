@@ -23,6 +23,7 @@
 use super::mmu::Address;
 
 pub const KERBASE : Address = 0xFFFFFFFF80000000;
+pub const PHYSTOP : Address = 0xE000000;
 
 //TODO - in C this is a macro - need to figure out the right thing in RUST
 pub fn P2V(address : Address) -> Address {

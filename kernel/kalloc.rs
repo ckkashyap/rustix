@@ -32,6 +32,7 @@ struct KmemT {
 
 
 static mut kmem : KmemT = KmemT{ lock: DUMMY_LOCK, use_lock: 0} ;
+static mut end : Address = 0;
 
 pub fn kinit1(vstart: Address, vend: Address) {
 	unsafe {
@@ -50,6 +51,10 @@ fn free_range(vstart: Address, vend: Address) {
 	//	asm!("mov $0 , %rbx" : /* no outputs */ : "r"(address) : "eax");
 	//}
 
+	unsafe {
+	end = vstart;
+	}
+
 	loop {
 		kfree(address);
 		address = address + PG_SIZE;
@@ -59,25 +64,25 @@ fn free_range(vstart: Address, vend: Address) {
 	}
 }
 
-fn kfree(a : Address){
-/*
-	struct run *r;
+fn kfree(v : Address) {
 
-	if((uintp)v % PGSIZE || v < end || v2p(v) >= PHYSTOP)
-		panic("kfree");
+	//struct run *r;
 
-	// Fill with junk to catch dangling refs.
-	memset(v, 1, PGSIZE);
-
-	if(kmem.use_lock)
-		acquire(&kmem.lock);
-	r = (struct run*)v;
-	r->next = kmem.freelist;
-	kmem.freelist = r;
-	if(kmem.use_lock)
-		release(&kmem.lock);
-
-
-
-		*/
+//	if(v % PG_SIZE || v < end || v2p(v) >= PHYSTOP)
+//		panic("kfree");
+//
+//	// Fill with junk to catch dangling refs.
+//	memset(v, 1, PGSIZE);
+//
+//	if(kmem.use_lock)
+//		acquire(&kmem.lock);
+//	r = (struct run*)v;
+//	r->next = kmem.freelist;
+//	kmem.freelist = r;
+//	if(kmem.use_lock)
+//		release(&kmem.lock);
+//
+//
+//
+//		*/
 }
