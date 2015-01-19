@@ -22,7 +22,7 @@
 
 LD=ld
 AR=ar
-QEMU=qemu-system-x86_64 -kernel staging/kernel.sys -serial stdio -vnc :1 -no-reboot -d int
+QEMU=qemu-system-x86_64 -kernel staging/kernel.sys -serial stdio -vnc :1 -no-reboot -d int -s
 LINUX_TARGET=x86_64-unknown-linux-gnu
 MAC_TARGET=x86_64-apple-darwin
 LINUX_RUST_DIR=$(RUST_ROOT)/rust-nightly-$(LINUX_TARGET)

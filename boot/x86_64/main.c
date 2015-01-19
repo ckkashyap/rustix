@@ -53,7 +53,8 @@ main(void)
   char ch = 'A';
   char cl[] = {0x1f, 0x0e, 0x4f};
   int ci=0;
-  cmain();
+  void *endAddress = (void *)end;
+  cmain(endAddress);
   while(1) {
 	  ch='A';
 	  for (i=0;i<4000;i+=2){
