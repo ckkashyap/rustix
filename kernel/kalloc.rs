@@ -50,10 +50,10 @@ fn free_range(vstart: Address, vend: Address) {
 	let mut address = pg_roundup(vstart);
 
 	// Keep it around for future debugging
-	unsafe {
-		asm!("mov $0 , %rax" : /* no outputs */ : "r"(vend) : "eax");
-		asm!("mov $0 , %rbx" : /* no outputs */ : "r"(address) : "eax");
-	}
+	//unsafe {
+	//	asm!("mov $0 , %rax" : /* no outputs */ : "r"(vend) : "eax");
+	//	asm!("mov $0 , %rbx" : /* no outputs */ : "r"(address) : "eax");
+	//}
 
 	loop {
 		kfree(address);
