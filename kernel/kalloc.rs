@@ -25,6 +25,7 @@ use super::mmu::{Address, PG_SIZE, pg_roundup};
 use super::memlayout::{v2p,PHYSTOP};
 use super::uart::uart_put_str;
 use super::console::panic;
+use super::rlibc::memset;
 
 struct KmemT {
     lock: Spinlock,
@@ -81,8 +82,10 @@ fn kfree(v : Address) {
 
     
 
-//	// Fill with junk to catch dangling refs.
-//	memset(v, 1, PGSIZE);
+    unsafe {
+	// Fill with junk to catch dangling refs.
+	memset(v as * mut u8, 1, PG_SIZE as usize);
+    }
 //
 //	if(kmem.use_lock)
 //		acquire(&kmem.lock);
