@@ -33,7 +33,7 @@ pub struct Spinlock {
 pub const DUMMY_LOCK: Spinlock = Spinlock {locked:0, name:"" } ;
 
 
-pub fn init_lock(lk : &mut Spinlock, name : &'static str )
+pub fn init_lock(lk: &mut Spinlock, name : &'static str )
 {
 	lk.name = name;
 	lk.locked = 0;
