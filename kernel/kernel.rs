@@ -24,7 +24,7 @@
 
 #![crate_name = "kernel"]
 #![crate_type = "staticlib"]
-#![feature(lang_items, asm)]
+#![feature(lang_items, asm, intrinsics)]
 #![no_std]
 #[lang="sized"]
 #[lang="sync"]
@@ -39,6 +39,7 @@ mod spinlock;
 mod kalloc;
 mod mmu;
 mod memlayout;
+mod rlibc;
 mod console;
 mod task;
 
