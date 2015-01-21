@@ -21,17 +21,19 @@
 // SOFTWARE.
 
 use core::str::StrExt;
+use core::marker::Copy;
 use super::spinlock::{Spinlock, DUMMY_LOCK, init_lock};
 
-pub const TASK_NUM: usize = 512;
+pub const TASK_NUM: usize = 1024;
 
-#[derive(Clone, Copy)]
 pub struct Task {
     sz: usize,
     pid: usize,
     killed: isize,
     name: &'static str
 }
+
+impl Copy for Task {}
 
 struct TaskTable {
     lock: Spinlock,
