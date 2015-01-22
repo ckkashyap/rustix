@@ -37,3 +37,10 @@ pub fn inb(port: u16) -> u8 {
         return ret;
 }
 
+pub fn read_eflags() -> u64 { //TODO 64 bit hard coded
+	let ret : u64;
+	unsafe {
+		asm!("pushf; pop $0" : "=r"(ret) : );
+	}
+	return ret;
+}
