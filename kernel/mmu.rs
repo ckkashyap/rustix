@@ -24,8 +24,11 @@ use super::spinlock::{Spinlock, DUMMY_LOCK, init_lock};
 use super::uart::uart_put_str;
 
 pub type Address = u64;
-pub const PG_SIZE : Address = 4096;
+pub const PG_SIZE: Address = 4096;
 
 pub fn pg_roundup(sz: Address) -> Address {
 	sz + (PG_SIZE - 1) & ! (PG_SIZE - 1)
 }
+
+// Eflags register
+pub const FL_IF: Address = 0x00000200;

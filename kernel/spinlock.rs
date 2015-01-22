@@ -20,22 +20,43 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-
-
 use core::str::StrExt;
+use task::Cpu;
+use x86asm::{read_eflags, cli};
+use mmu::FL_IF;
+use console::panic;
 
 pub struct Spinlock {
-	locked : u32,
-	name : & 'static str,
-	//TODO cpu
+	locked: u32,
+	name: &'static str,
+    cpu: *mut Cpu
 }
 
-pub const DUMMY_LOCK: Spinlock = Spinlock {locked:0, name:"" } ;
+pub const DUMMY_LOCK: Spinlock = Spinlock{locked: 0, name: "", cpu: 0 as (*mut Cpu)};
 
-
-pub fn init_lock(lk: &mut Spinlock, name : &'static str )
-{
+pub fn init_lock(lk: &mut Spinlock, name : &'static str) {
 	lk.name = name;
 	lk.locked = 0;
-	//TODO lk->cpu = 0;
+    lk.cpu = 0 as (*mut Cpu);
+}
+
+impl Spinlock {
+    pub fn holding(&self) -> bool {
+        self.locked == 1u32 // TODO: cpu
+    }
+}
+
+fn pushcli() {
+    let eflags = read_eflags();
+    cli();
+}
+
+fn popcli() {
+    // if (readeflags() & FL_IF) {
+    //     panic("popcli - interruptible");
+    // }
+    // if(--cpu->ncli < 0)
+    //     panic("popcli");
+    // if(cpu->ncli == 0 && cpu->intena)
+    //     sti();
 }

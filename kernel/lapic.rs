@@ -20,54 +20,8 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-use core::str::StrExt;
-use core::marker::Copy;
-use super::spinlock::{Spinlock, DUMMY_LOCK, init_lock};
 
-pub const TASK_NUM: usize = 1024;
-
-pub struct Cpu {
-    id: usize,      // Local APIC ID; index to cpus[] below
-    started: usize, // Has the CPU started?
-    ncli: isize,    // Depth of pushcli nesting.
-    intena: isize,  // Were interrupts enabled before pushcli?
-    cpu:  *mut Cpu, //
-    task: *mut Task // The currently-running process.
-}
-
-
-pub enum ProcState { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE }
-
-pub struct Task {
-    sz: usize,
-    pid: usize,
-    killed: isize,
-    state: ProcState,
-    name: &'static str
-}
-
-impl Copy for ProcState {}
-impl Copy for Task {}
-
-struct TaskTable {
-    lock: Spinlock,
-    procs: &'static [Task; TASK_NUM]
-}
-
-static mut procs : TaskTable = TaskTable{
-    lock: DUMMY_LOCK,
-    procs: &[
-        Task {
-            sz: 0us,
-            pid: 0us,
-            killed: 0is,
-            state: ProcState::UNUSED,
-            name: "undef"
-        }; TASK_NUM]
-};
-
-pub fn init_proc() {
-    unsafe {
-        init_lock(&mut procs.lock, "task_table");
-    }
+// TODO
+pub fn cpunum() -> isize {
+    return 0i;
 }
