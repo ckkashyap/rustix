@@ -35,18 +35,6 @@ pub fn inb(port: u16) -> u8 {
     return ret;
 }
 
-
-pub fn readeflags() -> u32 {
-    let eflags: u32;
-    // unsafe {
-    //     asm!("pushfl; popl %al": "={ax}"(eflags));
-    //     //asm volatile("pushfl; popl %0" : "=r" (eflags));
-    // }
-    eflags = 0u32;
-    return eflags;
-}
-
-
 pub fn cli() {
     unsafe {
         asm!("cli");
@@ -57,4 +45,13 @@ pub fn sti() {
     unsafe {
         asm!("sti");
     }
+}
+
+
+pub fn read_eflags() -> u64 { //TODO 64 bit hard coded
+	let ret : u64;
+	unsafe {
+		asm!("pushf; pop $0" : "=r"(ret) : );
+	}
+	return ret;
 }

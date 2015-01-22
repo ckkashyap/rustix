@@ -22,7 +22,7 @@
 
 use core::str::StrExt;
 use task::Cpu;
-use x86asm::{readeflags, cli};
+use x86asm::{read_eflags, cli};
 use mmu::FL_IF;
 use console::panic;
 
@@ -47,7 +47,7 @@ impl Spinlock {
 }
 
 fn pushcli() {
-    let eflags = readeflags();
+    let eflags = read_eflags();
     cli();
 }
 
