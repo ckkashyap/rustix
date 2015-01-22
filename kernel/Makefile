@@ -29,7 +29,6 @@ all: libcompiler-rt.a libmorestack.a
 
 libcore.rlib:
 	cp $(LINUX_RUST_DIR)/lib/rustlib/$(LINUX_TARGET)/lib/libcore-*.rlib libcore.rlib
-	cp $(LINUX_RUST_DIR)/lib/rustlib/$(LINUX_TARGET)/lib/libstd-*.rlib libstd.rlib
 
 	#$(RUSTC) --target=$(TARGET) -C no-stack-check --crate-type lib $(LIB_RS) --crate-name core
 
