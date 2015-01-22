@@ -22,6 +22,9 @@
 
 use core::str::StrExt;
 use task::Cpu;
+use x86asm::{readeflags, cli};
+use mmu::FL_IF;
+use console::panic;
 
 pub struct Spinlock {
 	locked: u32,
@@ -41,4 +44,19 @@ impl Spinlock {
     pub fn holding(&self) -> bool {
         self.locked == 1u32 // TODO: cpu
     }
+}
+
+fn pushcli() {
+    let eflags = readeflags();
+    cli();
+}
+
+fn popcli() {
+    // if (readeflags() & FL_IF) {
+    //     panic("popcli - interruptible");
+    // }
+    // if(--cpu->ncli < 0)
+    //     panic("popcli");
+    // if(cpu->ncli == 0 && cpu->intena)
+    //     sti();
 }
