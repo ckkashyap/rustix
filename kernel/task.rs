@@ -46,7 +46,7 @@ static mut procs : TaskTable = TaskTable{
         Task {
             sz: 0us,
             pid: 0us,
-            killed: 9is,
+            killed: 0is,
             name: "undef"
         }; TASK_NUM]
 };
