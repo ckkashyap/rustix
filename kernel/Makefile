@@ -24,7 +24,7 @@ include $(SOURCE_ROOT)/Rules.inc
 
 all: libcompiler-rt.a libmorestack.a
 	cp -f $(LINUX_RUST_DIR)/lib/rustlib/$(LINUX_TARGET)/lib/libcore-*.rlib libcore.rlib
-	$(RUSTC) --target=$(LINUX_TARGET) -C no-stack-check kernel.rs  \
+	$(RUSTC) --target=$(LINUX_TARGET) -O -C no-stack-check kernel.rs  \
 			--extern core=libcore.rlib -L.
 
 libcore.rlib:
